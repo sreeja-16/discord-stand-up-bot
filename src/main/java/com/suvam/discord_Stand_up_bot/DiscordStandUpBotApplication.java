@@ -26,9 +26,7 @@ public class DiscordStandUpBotApplication {
                     .setActivity(Activity.watching("morning standup"))
                     .addEventListeners(new UserRepliedEvent())
                     .build().awaitReady();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (LoginException e) {
+        } catch (InterruptedException | LoginException e) {
             e.printStackTrace();
         }
     }
