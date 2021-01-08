@@ -24,12 +24,11 @@ public class StandUpScheduler extends TimerTask {
         this.jda = jda;
         this.timer = timer;
         workingDaysFromDb = null;
-        allowedDayValues = new ArrayList<>();
-        //this.findWorkingDays();
+       // allowedDayValues = new ArrayList<>();
     }
 
     public void findWorkingDays(String guildName) {
-        allowedDayValues=null;
+        allowedDayValues = new ArrayList<>();
         workingDaysFromDb = InsertDays.findGuildWorkingDays(guildName);
         for (WorkingDays workingDay : workingDaysFromDb) {
             if (workingDay.getIsChecked() == 1) {

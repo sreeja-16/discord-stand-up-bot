@@ -12,7 +12,7 @@
                 <select th:field="*{guildName}">
                     <option th:each="guildName: ${allGuilds}" th:text="${guildName}" th:value="${guildName}"> </option>
                 </select>
-                <input type="text" th:field="*{time}" placeholder="hh:mm 24 hour clock">
+                <input type="text" th:field="*{time}" placeholder="hh:mm 24 hour clock" required>
                 <h5>Schedule your meeting here</h5>
                 <p th:each="day : ${allWeekDays}">
                     <input type="checkbox" th:field="*{workingWeekDays}" th:value="${day.weekDayValue}">
