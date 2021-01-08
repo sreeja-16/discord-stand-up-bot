@@ -29,10 +29,10 @@ public class StandUpScheduler extends TimerTask {
     }
 
     public void findWorkingDays(String guildName) {
-        //this method will recive a guild name based on it we will fetch working days, if it is null then default days configuration will be fetched
         workingDaysFromDb = InsertDays.findGuildWorkingDays(guildName);
         for (WorkingDays workingDay : workingDaysFromDb) {
             if (workingDay.getIsChecked() == 1) {
+                System.out.println("allowed day number "+workingDay.getDayNumber());
                 allowedDayValues.add(workingDay.getDayNumber());
             }
         }
@@ -42,13 +42,10 @@ public class StandUpScheduler extends TimerTask {
     public void run() {
         Calendar calendar = Calendar.getInstance();
         Integer todaysDay = calendar.get(Calendar.DAY_OF_WEEK);
-        //based on present time fetch guild name from guild-time table, if any guild name came then check if today is working day for that guild and then
-        // send message to all members of that guild name
+
         String presentTime = new SimpleDateFormat("HH:mm").format(new Date());
         GuildExecutionTime guildTime = InsertDays.getGuildExecutionTime(presentTime); // same time for multiple server
-        System.out.println(presentTime+"####################################");
         if (guildTime != null) {
-            System.out.println("############fetched time..");
             this.findWorkingDays(guildTime.getGuildName());
             if (allowedDayValues.contains(todaysDay)) {
                 System.out.println("##############Entered checkbox selected part"+todaysDay);
