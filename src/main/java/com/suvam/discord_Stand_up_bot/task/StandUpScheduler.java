@@ -48,10 +48,6 @@ public class StandUpScheduler extends TimerTask {
         if (guildTime != null) {
             this.findWorkingDays(guildTime.getGuildName());
             if (allowedDayValues.contains(todaysDay)) {
-                System.out.println("##############Entered checkbox selected part"+todaysDay);
-                for(Integer allowedDayValue:allowedDayValues) {
-                    System.out.println(allowedDayValue+"*********************");
-                }
                 TimerTask attendance = new com.suvam.discord_Stand_up_bot.task.Attendence(jda, guildTime.getGuildName());
                 timer.schedule(attendance, 1000 * 60 * 4);
                 InsertQuestions.insert();

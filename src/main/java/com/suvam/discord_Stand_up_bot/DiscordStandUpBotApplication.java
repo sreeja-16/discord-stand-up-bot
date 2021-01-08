@@ -45,9 +45,7 @@ public class DiscordStandUpBotApplication {
         DiscordStandUpBotApplication.globalJda=jda;*/
 
       //  InsertDays.insert();
-
         Timer timer = new Timer();
-        System.out.println("RRRRRRRRRRRRRRRRRRRRRunning");
         TimerTask standUp = new StandUpScheduler(globalJda, timer);
         timer.schedule(standUp, 0, 1000*60);
     }
