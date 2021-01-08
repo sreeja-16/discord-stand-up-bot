@@ -15,7 +15,7 @@ import java.util.*;
 public class StandUpScheduler extends TimerTask {
     private JDA jda;
     public static Map<String, GuildMember> membersMap;
-    private final List<Integer> allowedDayValues;
+    private List<Integer> allowedDayValues;
     private List<WorkingDays> workingDaysFromDb;
     private final Timer timer;
     String botName = "standup-bot";
@@ -29,6 +29,7 @@ public class StandUpScheduler extends TimerTask {
     }
 
     public void findWorkingDays(String guildName) {
+        allowedDayValues=null;
         workingDaysFromDb = InsertDays.findGuildWorkingDays(guildName);
         for (WorkingDays workingDay : workingDaysFromDb) {
             if (workingDay.getIsChecked() == 1) {
