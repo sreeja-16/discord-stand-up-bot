@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface GuildExecutionTimeRepository extends JpaRepository<GuildExecutionTime, Integer> {
 
@@ -21,6 +23,6 @@ public interface GuildExecutionTimeRepository extends JpaRepository<GuildExecuti
     public void update(String time,String guildName);
 
     @Query(value="SELECT * FROM guild_execution_time WHERE execution_time=?1",nativeQuery = true)
-    public GuildExecutionTime findByTime(String time);
+    public List<GuildExecutionTime> findByTime(String time);
 
 }

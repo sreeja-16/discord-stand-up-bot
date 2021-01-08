@@ -42,65 +42,6 @@ public class InsertDays {
         return workingDaysService.findWorkingDayByGuild(guildName);
     }
 
-  /*  public static void insert(){
-        if(workingDaysService.findWorkingDayById(0)==null){
-            WorkingDays sunday=new WorkingDays();
-         //   sunday.setId(0);
-            sunday.setDayNumber(1);
-            sunday.setIsChecked(0);
-            sunday.setGuildName("defaultGuild");
-            workingDaysService.save(sunday);
-        }
-        if(workingDaysService.findWorkingDayById(1)==null){
-            WorkingDays monday=new WorkingDays();
-         //   monday.setId(1);
-            monday.setDayNumber(2);
-            monday.setIsChecked(1);
-            monday.setGuildName("defaultGuild");
-            workingDaysService.save(monday);
-        }
-        if(workingDaysService.findWorkingDayById(2)==null){
-            WorkingDays tuesday=new WorkingDays();
-        //    tuesday.setId(2);
-            tuesday.setDayNumber(3);
-            tuesday.setIsChecked(1);
-            tuesday.setGuildName("defaultGuild");
-            workingDaysService.save(tuesday);
-        }
-        if(workingDaysService.findWorkingDayById(3)==null){
-            WorkingDays wednesday=new WorkingDays();
-        //    wednesday.setId(3);
-            wednesday.setDayNumber(4);
-            wednesday.setIsChecked(1);
-            wednesday.setGuildName("defaultGuild");
-            workingDaysService.save(wednesday);
-        }
-        if(workingDaysService.findWorkingDayById(4)==null){
-            WorkingDays thursday=new WorkingDays();
-         //   thursday.setId(4);
-            thursday.setDayNumber(5);
-            thursday.setIsChecked(1);
-            thursday.setGuildName("defaultGuild");
-            workingDaysService.save(thursday);
-        }
-        if(workingDaysService.findWorkingDayById(5)==null){
-            WorkingDays friday=new WorkingDays();
-           // friday.setId(5);
-            friday.setDayNumber(6);
-            friday.setIsChecked(1);
-            friday.setGuildName("defaultGuild");
-            workingDaysService.save(friday);
-        }
-        if(workingDaysService.findWorkingDayById(6)==null){
-            WorkingDays saturday=new WorkingDays();
-         //   saturday.setId(6);
-            saturday.setDayNumber(7);
-            saturday.setIsChecked(1);
-            saturday.setGuildName("defaultGuild");
-            workingDaysService.save(saturday);
-        }
-    }*/
-
     public static void insert(String guildName, CheckedWeekDays checkedWeekDays) {
         List<Integer> workingDays = checkedWeekDays.getWorkingWeekDays();
 
@@ -176,7 +117,7 @@ public class InsertDays {
 
     }
 
-    public static GuildExecutionTime getGuildExecutionTime(String time) {
+    public static List<GuildExecutionTime> getGuildExecutionTime(String time) {
         return guildExecutionTimeService.findByTime(time);
     }
 }

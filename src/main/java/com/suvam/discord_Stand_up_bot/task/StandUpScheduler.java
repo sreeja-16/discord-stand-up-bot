@@ -24,7 +24,7 @@ public class StandUpScheduler extends TimerTask {
         this.jda = jda;
         this.timer = timer;
         workingDaysFromDb = null;
-       // allowedDayValues = new ArrayList<>();
+        // allowedDayValues = new ArrayList<>();
     }
 
     public void findWorkingDays(String guildName) {
@@ -32,7 +32,7 @@ public class StandUpScheduler extends TimerTask {
         workingDaysFromDb = InsertDays.findGuildWorkingDays(guildName);
         for (WorkingDays workingDay : workingDaysFromDb) {
             if (workingDay.getIsChecked() == 1) {
-                System.out.println("allowed day number "+workingDay.getDayNumber());
+                System.out.println("allowed day number " + workingDay.getDayNumber());
                 allowedDayValues.add(workingDay.getDayNumber());
             }
         }
@@ -44,21 +44,24 @@ public class StandUpScheduler extends TimerTask {
         Integer todaysDay = calendar.get(Calendar.DAY_OF_WEEK);
 
         String presentTime = new SimpleDateFormat("HH:mm").format(new Date());
-        GuildExecutionTime guildTime = InsertDays.getGuildExecutionTime(presentTime); // same time for multiple server
-        if (guildTime != null) {
-            this.findWorkingDays(guildTime.getGuildName());
-            if (allowedDayValues.contains(todaysDay)) {
-                TimerTask attendance = new com.suvam.discord_Stand_up_bot.task.Attendence(jda, guildTime.getGuildName());
-                timer.schedule(attendance, 1000 * 60 * 4);
-                InsertQuestions.insert();
-                membersMap = new HashMap<>();
-                List<Member> members = jda.getGuildsByName(guildTime.getGuildName(), true).get(0).getMembers();
-                Iterator<Member> memberIterator = members.iterator();
-                while (memberIterator.hasNext()) {
-                    User guildUser = memberIterator.next().getUser();
-                    String name = guildUser.getName();
-                    if (!name.equals(botName)) {
-                        membersMap.put(name, new GuildMember(guildUser, guildTime.getGuildName()));
+        List<GuildExecutionTime> guildTime = InsertDays.getGuildExecutionTime(presentTime);
+        if (guildTime.size() > 0) {
+            membersMap = new HashMap<>();
+            for (GuildExecutionTime guild : guildTime) {
+                this.findWorkingDays(guild.getGuildName());
+                if (allowedDayValues.contains(todaysDay)) {
+                    TimerTask attendance = new com.suvam.discord_Stand_up_bot.task.Attendence(jda, guild.getGuildName());
+                    timer.schedule(attendance, 1000 * 60 * 4);
+                    InsertQuestions.insert();
+                    //membersMap = new HashMap<>();
+                    List<Member> members = jda.getGuildsByName(guild.getGuildName(), true).get(0).getMembers();
+                    Iterator<Member> memberIterator = members.iterator();
+                    while (memberIterator.hasNext()) {
+                        User guildUser = memberIterator.next().getUser();
+                        String name = guildUser.getName();
+                        if (!name.equals(botName)) {
+                            membersMap.put(name, new GuildMember(guildUser, guild.getGuildName()));
+                        }
                     }
                 }
             }
