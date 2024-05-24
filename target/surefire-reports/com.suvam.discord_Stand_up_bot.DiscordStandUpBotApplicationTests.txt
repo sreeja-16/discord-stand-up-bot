@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.suvam.discord_Stand_up_bot.DiscordStandUpBotApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.57 s - in com.suvam.discord_Stand_up_bot.DiscordStandUpBotApplicationTests

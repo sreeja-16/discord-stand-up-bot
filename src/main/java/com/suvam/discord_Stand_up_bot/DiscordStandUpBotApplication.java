@@ -47,4 +47,5 @@ public class DiscordStandUpBotApplication {
         TimerTask standUp = new StandUpScheduler(globalJda, timer);
         timer.schedule(standUp, 0, 1000*60);
     }
+    //mvn spring-boot:run
 }
